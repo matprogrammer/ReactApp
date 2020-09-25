@@ -1,10 +1,10 @@
 import React from 'react';
 
+import TopSearch from '../../components/topSearch';
+
 function Search() {
   return (
-    <div>
-        Search
-    </div>
+    <TopSearch />
   );
 }
 

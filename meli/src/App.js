@@ -4,10 +4,10 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import './App.css';
 
 import { Provider } from 'react-redux';
 import store from './store';
+import history from '../src/app/utils/history';
 
 import Search from './app/view/search';
 import SearchResult from './app/view/searchResult';
@@ -15,7 +15,7 @@ import Details from './app/view/details';
 
 function App() {
   return (
-    <Router forceRefresh={true}>
+    <Router forceRefresh={true} history={history}>
       <Provider store={store}>
         <Switch>
           <Route exact path="/">

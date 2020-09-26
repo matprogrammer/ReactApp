@@ -5,19 +5,16 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Provider } from 'react-redux';
-import store from './store';
-import history from '../src/app/utils/history';
+import history from './app/utils/history';
 
 import Search from './app/view/search';
-import SearchResult from './app/view/searchResult';
+import SearchResult from './app/view/searchResult/SearchResult';
 import Details from './app/view/details';
 
 function App() {
   return (
     <Router forceRefresh={true} history={history}>
-      <Provider store={store}>
-        <Switch>
+      <Switch>
           <Route exact path="/">
             <Search />
           </Route>
@@ -28,7 +25,6 @@ function App() {
             <Details />
           </Route>
         </Switch>
-      </Provider>
     </Router>
   );
 }

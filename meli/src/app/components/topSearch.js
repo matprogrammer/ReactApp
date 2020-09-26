@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-
+import {
+    Link
+  } from "react-router-dom";
 import logo from '../assets/logo.png';
 import search from '../assets/search.png';
 import history from '../utils/history';
@@ -17,7 +19,7 @@ function TopSearch() {
     }
 
     const handleKeyPress = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             if (e.target.value) {
                 history.push(`/items?search=${e.target.value}`);
             }
@@ -31,7 +33,9 @@ function TopSearch() {
     return (
         <div className="container">
             <div className="search-container">
-                <img className="logo" src={logo} />
+                <Link to="/">
+                    <img className="logo" src={logo} alt="logo-meli"/>
+                </Link>
                 <div className="logo-container">
                     <input
                         className="input-search"
@@ -45,6 +49,7 @@ function TopSearch() {
                         src={search}
                         className="search-icon"
                         onClick={(e) => handleSearch(e)}
+                        alt="logo-search"
                     />
                 </div>
             </div>

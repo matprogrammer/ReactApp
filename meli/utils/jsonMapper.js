@@ -1,20 +1,22 @@
-function mapper (item) {
+function mapper (item, description) {
     var integer = 0;
-    var decimal = 00;
-    // if (item.installments != null) {
-    //     var { integer, decimal} = splitFloat(item.installments.amount);
-    // }
+    var decimal = '00';
+    if (item.installments != null) {
+        var { integer, decimal} = splitFloat(item.installments.amount);
+    }
     const result = {
         "id": item.id,
         "title": item.title,
         "price": {
             "currency": item.currency_id,
-            "amount": item.price,
+            "amount": item.installments != null ? integer : item.price,
             "decimals": decimal,
         },
         "picture": item.thumbnail,
         "condition": item.condition,
-        "free_shipping": item.shipping.free_shipping
+        "free_shipping": item.shipping.free_shipping,
+        "description": description,
+        "sold_quantity": item.sold_quantity
     }
     return result;
 }

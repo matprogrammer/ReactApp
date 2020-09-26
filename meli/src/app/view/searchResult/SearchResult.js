@@ -4,14 +4,14 @@ import TopSearch from '../../components/topSearch';
 import ResultItem from '../../components/resultItem';
 import Shimmer from '../../components/shimmer';
 
-function SearchResult({ fetchResultsService }) {
+function SearchResult() {
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const params = new URLSearchParams(window.location.search);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/items?search=${params}`)
+    fetch(`/api/items?q=${params}`)
 		.then(res => res.json())
 		.then(res => {
       setResults(res.products.items);
@@ -25,7 +25,7 @@ function SearchResult({ fetchResultsService }) {
   return (
     <div className="body-container">
         <TopSearch />
-        <div className="items-container ">
+        <div className="items-container">
           {
             !isLoading ? (
               results.length > 0 ?

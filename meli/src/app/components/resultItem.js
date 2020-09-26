@@ -13,7 +13,7 @@ function ResultItem(item) {
         <img className="item-image" src={picture} alt="shipping" />
         <div className="item-info ">
           <span className="item-price">$ {price.amount}{ free_shipping && <img className="item-shipping" src={shippingImage} alt="shipping" />}</span>
-          <span className="item-title">{title} </span>
+          <span className="item-title">{title}</span>
         </div>
       </div>
     </Link>

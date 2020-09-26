@@ -12,15 +12,15 @@ var products = {
 
 
 module.exports = (app) => {
-    app.get('/items', (req, res) => {
-        const baseUrl = 'https://api.mercadolibre.com/sites/MLA/search?q=';
-        let { search } = req.query;
-        let apiUrl = baseUrl + search;
-        fetch(apiUrl)
+    app.get('/api/items', (req, res) => {
+        const { q } = req.query;
+        console.log(req.query)
+        const url = `https://api.mercadolibre.com/sites/MLA/search?q=${q}&limit=4`;
+        fetch(url)
         .then(res => res.json())
         .then(response => {
             if (response.results.length) {
-                response.results.slice(0, 4).map(item => {
+                response.results.map(item => {
                     products.items.push(mapper(item))
                 })
                 console.log(products.items.length);

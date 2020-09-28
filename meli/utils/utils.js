@@ -2,6 +2,11 @@ function removeSpecialChars(string) {
     return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+function getQueryParam(query) {
+    var param = query.split("=")[1];
+    return removeSpecialChars(param);
+}
+
 function mapper (item, description) {
     var { integer, decimal} = splitFloat(item.price);
     const result = {
@@ -30,6 +35,6 @@ function splitFloat (price) {
 }
 
 module.exports = {
-    removeSpecialChars,
+    getQueryParam,
     mapper
 };

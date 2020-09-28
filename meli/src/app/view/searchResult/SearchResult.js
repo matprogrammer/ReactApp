@@ -5,6 +5,7 @@ import TopSearch from '../../components/topSearch';
 import ResultItem from '../../components/resultItem';
 import Shimmer from '../../components/shimmer';
 import Breadcrumb from '../../components/breadcrumb';
+import NoResults from '../../components/noResults';
 
 function SearchResult() {
   const [results, setResults] = useState([]);
@@ -34,7 +35,7 @@ function SearchResult() {
               results.items?.map(i => (
                   <ResultItem key={i.id} item={i} />
                 )) :
-                <span>SIN RESULTADOS</span>
+                <NoResults />
             ) : <Shimmer/>
           }
         </div>

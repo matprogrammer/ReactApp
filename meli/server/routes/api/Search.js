@@ -1,6 +1,6 @@
 const axios = require('axios')
-const { removeSpecialChars, mapper } = require('../../../utils/utils');
-const path = 'https://api.mercadolibre.com/sites/MLA/search?';
+const { getQueryParam, mapper } = require('../../../utils/utils');
+const path = 'https://api.mercadolibre.com/sites/MLA/search?q=';
 const categoriesPath = 'https://api.mercadolibre.com'
 var products = {
     "author": {
@@ -14,13 +14,13 @@ var products = {
 module.exports = (app) => {
     app.get('/api/items', async (req, res) => {
         let { q } = req.query;
-        q = removeSpecialChars(q);
-        const url = `${path}q=${q}&limit=4`;
+        let querysearch = getQueryParam(q);
+        const url = `${path}${querysearch}&limit=4`;
         products.items = [];
         products.categories = [];
         try {
             const result = await axios.get(url);
-            if (result.data.results) {
+            if (result.data.results.length > 0) {
                 const categoryId = result.data.results[0].category_id;
                 result.data.results.map(item => {
                     products.items.push(mapper(item, null))
@@ -32,6 +32,7 @@ module.exports = (app) => {
                         products.categories.push(c.name);
                     })
                 }
+
             }
             res.send({ products });
         }

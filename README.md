@@ -12,3 +12,6 @@ Correr Server
   
 Correr App
   - npm start
+  
+Test
+  - npm run test

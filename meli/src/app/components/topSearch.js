@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
     Link
   } from "react-router-dom";
+
 import logo from '../assets/logo.png';
 import search from '../assets/search.png';
 import history from '../utils/history';

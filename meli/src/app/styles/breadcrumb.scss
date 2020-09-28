@@ -1,0 +1,19 @@
+.breadcrumb-container {
+    flex-direction: row;
+    width: 80%;
+    display: flex;
+    margin-top: 10px;
+    & a:last-child .breadcrumb-arrow {
+        display: none;
+    }
+}
+
+.breadcrumb-arrow {
+    margin: 0 5px;
+    color: #1259c3;
+}
+
+.breadcrumb-item {
+    color: #1259c3;
+    font-size: 14px;
+}

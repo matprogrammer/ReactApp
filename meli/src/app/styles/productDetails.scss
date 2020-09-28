@@ -18,10 +18,18 @@
 
 .product-condition {
     text-transform: capitalize;
+    font-style: italic;
+    font-weight: bold;
+    color: #58ca58;
+}
+
+.product-sold {
+    margin-left: 10px;
+    font-size: 12px;
 }
 
 .product-title {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .product-decimals {
@@ -35,10 +43,18 @@
     padding: 20px;
 }
 
+.description-title {
+    font-size: 24px;
+    font-weight: bold;
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 15px;
+}
+
 .product-price {
     font-weight: bold;
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .product-button {

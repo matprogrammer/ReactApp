@@ -1,5 +1,6 @@
-const fetch = require('node-fetch');
-const mapper = require('../../../utils/jsonMapper');
+const axios = require('axios')
+const { mapper } = require('../../../utils/utils');
+const path = 'https://api.mercadolibre.com'
 
 var products = {
     "author": {
@@ -7,35 +8,40 @@ var products = {
         "lastname": "Aguiar"
     },
     "categories": [],
-    "items": []
+    "item": []
 };
 
 module.exports = (app) => {
-    app.get('/items/:id', (req, res) => {
-        const baseUrl = 'https://api.mercadolibre.com/items/';
+    app.get('/api/items/:id', async (req, res) => {
         let id = req.params.id;
-        let apiUrl = baseUrl + id;
-        fetch(apiUrl)
-        .then(res => res.json())
-        .then(response => {
-            if (response) {
-                const item = response;
-                console.log(item)
-                const url = `${apiUrl}/description`
-                fetch(url).then(res => res.json())
-                .then(response => {
-                    if (response) {
-                        products.items.push(mapper(item, response.plain_text))
+        const getProductUrl = `${path}/items/${id}`;
+        const getDescriptionUrl = `${path}/items/${id}/description`;
+        let productDescription = "";
+        products.item = [];
+        products.categories = [];
+        try {
+            const result = await axios.get(getProductUrl);
+            if (result.data) {
+                if (result.data.category_id) {
+                    const getCategoriesUrl = `${path}/categories/${result.data.category_id}`;
+                    const categories = await axios.get(getCategoriesUrl);
+                    if (categories.data.path_from_root) {
+                        categories.data.path_from_root.map(c => {
+                            products.categories.push(c.name);
+                        })
                     }
-                    res.send({ products });
-                })
+                }
+                const description = await axios.get(getDescriptionUrl);
+                if (description.data.plain_text) {
+                    productDescription = description.data.plain_text;
+                }
+                products.item.push(mapper(result.data, productDescription));
             }
-
-        })
-        .catch(err => {
-            console.log(err)
+            res.send({ products });
+        }
+        catch(err) {
+            console.log('Error product details: ', err);
             res.redirect('/error');
-        });
+        };
     })
 }
-

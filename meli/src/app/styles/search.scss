@@ -1,3 +1,7 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 .body-container {
     justify-content: center;
     align-items: center;
@@ -54,7 +58,8 @@
 }
 
 .items-container,
-.product-container {
+.product-container,
+.error-container {
     flex-direction: column;
     width: 80%;
     display: flex;

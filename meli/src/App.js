@@ -10,6 +10,7 @@ import history from './app/utils/history';
 import Search from './app/view/search';
 import SearchResult from './app/view/searchResult/SearchResult';
 import Details from './app/view/details';
+import Error from './app/view/error/Error';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/items/:id">
             <Details />
+          </Route>
+          <Route exact path="/error">
+            <Error />
           </Route>
         </Switch>
     </Router>

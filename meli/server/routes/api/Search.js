@@ -1,7 +1,8 @@
 const axios = require('axios')
 const { getQueryParam, mapper } = require('../../../utils/utils');
 const path = 'https://api.mercadolibre.com/sites/MLA/search?q=';
-const categoriesPath = 'https://api.mercadolibre.com'
+const categoriesPath = 'https://api.mercadolibre.com';
+
 var products = {
     "author": {
         "name": "Mauro",
@@ -25,14 +26,17 @@ module.exports = (app) => {
                 result.data.results.map(item => {
                     products.items.push(mapper(item, null))
                 });
-                const getCategoriesUrl = `${categoriesPath}/categories/${categoryId}`;
-                var categories = await axios.get(getCategoriesUrl);
-                if (categories.data.path_from_root) {
-                    categories.data.path_from_root.map(c => {
-                        products.categories.push(c.name);
-                    })
-                }
-
+                try {
+                    const getCategoriesUrl = `${categoriesPath}/categories/${categoryId}`;
+                    var categories = await axios.get(getCategoriesUrl);
+                    if (categories.data.path_from_root) {
+                        categories.data.path_from_root.map(c => {
+                            products.categories.push(c.name);
+                        })
+                    }
+                } catch (err) {
+                    console.log('Error get categories: ', err);
+                };
             }
             res.send({ products });
         }

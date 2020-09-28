@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
 	res.send('PORT 5000');
 })
 
+// app.get('/error', (req, res) => {
+// 	res.send('Error Page');
+// })
+
 app.get("/api/items?q=​:", search);
 app.get("/api/items/:id", details);
 

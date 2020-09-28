@@ -22,19 +22,28 @@ module.exports = (app) => {
         try {
             const result = await axios.get(getProductUrl);
             if (result.data) {
-                if (result.data.category_id) {
-                    const getCategoriesUrl = `${path}/categories/${result.data.category_id}`;
-                    const categories = await axios.get(getCategoriesUrl);
-                    if (categories.data.path_from_root) {
-                        categories.data.path_from_root.map(c => {
-                            products.categories.push(c.name);
-                        })
+                try {
+                    if (result.data.category_id) {
+                        const getCategoriesUrl = `${path}/categories/${result.data.category_id}`;
+                        const categories = await axios.get(getCategoriesUrl);
+                        if (categories.data.path_from_root) {
+                            categories.data.path_from_root.map(c => {
+                                products.categories.push(c.name);
+                            })
+                        }
                     }
-                }
-                const description = await axios.get(getDescriptionUrl);
-                if (description.data.plain_text) {
-                    productDescription = description.data.plain_text;
-                }
+                } catch (err) {
+                    console.log('Error get categories: ', err);
+                };
+
+                try {
+                    const description = await axios.get(getDescriptionUrl);
+                    if (description.data.plain_text) {
+                        productDescription = description.data.plain_text;
+                    }
+                } catch (err) {
+                    console.log('Error get description: ', err);
+                };
                 products.item.push(mapper(result.data, productDescription));
             }
             res.send({ products });

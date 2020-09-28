@@ -10,10 +10,14 @@ function ResultItem(item) {
   return (
     <Link to={{pathname: `/items/${id}`}}>
       <div className="item-container">
-        <img className="item-image" src={picture} alt="shipping" />
+        { picture && <img className="item-image" src={picture} alt="shipping" />}
         <div className="item-info ">
-          <span className="item-price">$ {price.amount}{ free_shipping && <img className="item-shipping" src={shippingImage} alt="shipping" />}</span>
-          <span className="item-title">{title}</span>
+          { price.amount && (
+            <span className="item-price">
+              $ {price.amount}{ free_shipping && <img className="item-shipping" src={shippingImage} alt="shipping" />}
+            </span>
+          ) }
+          { title && <span className="item-title">{title}</span> }
         </div>
       </div>
     </Link>

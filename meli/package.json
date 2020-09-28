@@ -3,12 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/plugin-transform-react-jsx": "^7.10.4",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
         "axios": "^0.19.2",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.5",
         "express": "^4.17.1",
-        "nocache": "^2.1.0",
         "node-fetch": "^2.6.1",
         "node-sass": "^4.14.1",
         "react": "^16.13.1",
@@ -22,8 +24,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "test": "jest"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -41,8 +43,23 @@
         ]
     },
     "devDependencies": {
+        "identity-obj-proxy": "^3.0.0",
         "redux": "^4.0.5",
         "redux-devtools": "^3.5.0"
     },
-    "proxy": "http://localhost:5000/"
+    "proxy": "http://localhost:5000/",
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ],
+        "plugins": [
+            "@babel/plugin-transform-react-jsx"
+        ]
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "\\.(css|scss|svg|png|jpg)$": "identity-obj-proxy"
+        }
+    }
 }

@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import connect from './connect';
 
 import TopSearch from '../../components/topSearch';
 import ProductDetails from '../../components/productDetails';
 import ProductShimmer from '../../components/productShimmer'
 import Breadcrumb from '../../components/breadcrumb';
 
-function Details() {
+function Details({ getProduct, productLoading }) {
 
   const [product, setProduct] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     async function fetchData() {
-      setLoading(true);
-      const parts = window.location.href.split('/');
-      const id = parts.pop() || parts.pop();
-      const result = await axios(`/api/items/${id}`)
-      if (result.data) {
-        setProduct(result.data.products);
-        setLoading(false);
+      const result = await getProduct();
+      if (result) {
+        setProduct(result);
+        setLoading(productLoading);
       }
     }
     fetchData();
@@ -40,4 +38,4 @@ function Details() {
   );
 }
 
-export default Details;
+export default connect(Details);

@@ -9,13 +9,18 @@ import history from './app/utils/history';
 
 import Search from './app/view/search';
 import SearchResult from './app/view/searchResult/SearchResult';
-import Details from './app/view/details';
+import Details from './app/view/details/Details';
 import Error from './app/view/error/Error';
+
+
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
     <Router forceRefresh={true} history={history}>
-      <Switch>
+      <Provider store={store}>
+        <Switch>
           <Route exact path="/">
             <Search />
           </Route>
@@ -29,6 +34,7 @@ function App() {
             <Error />
           </Route>
         </Switch>
+      </Provider>
     </Router>
   );
 }

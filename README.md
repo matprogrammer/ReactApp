@@ -5,7 +5,7 @@ Meli test
 Clonar repositorio
 
 Instalar dependencias 
-  - npm isntall
+  - npm install
   
 Correr Server
   - node server.js

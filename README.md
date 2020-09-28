@@ -1,6 +1,6 @@
 # maguiarML
 
-Meli test
+# Meli test
 
 Clonar repositorio
 
@@ -8,6 +8,7 @@ Instalar dependencias
   - npm install
   
 Correr Server
+  - cd server
   - node server.js
   
 Correr App
